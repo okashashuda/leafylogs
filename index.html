@@ -9,6 +9,21 @@
 </head>
 
 <body>
+    <div id="splashScreen" class="splash">
+        <h1>Plant Caring Simulation</h1>
+
+        <div class="dropdown">
+            <button class="dropbtn">choose a tree</button>
+            <div class="dropdown-content">
+                <a href="#">Option 1</a>
+                <a href="#">Option 2</a>
+                <a href="#">Option 3</a>
+            </div>
+        </div>
+
+        <h3>click anywhere to continue...</h3>
+    </div>
+    
     <div class="container">
         <!-- Plant Display Area -->
         <div class="plant-display">
@@ -27,11 +42,13 @@
             <p><strong>Hydration Level:</strong> <span id="hydrationStatus">100%</span></p>
             <p><strong>Nutrient Level:</strong> <span id="nutrientStatus">100%</span></p>
         </div>
+
+        <!-- New leaf -->
+        <textarea id="newLeaf" rows="4" cols="50" style="display: none;"></textarea>
+        <button id="submitMsg" style="display: none;">Write to leaf</button>
     </div>
 
-    <script src="app.js">
-        //include functions to auto compile here
-    </script>
+    <script src="app.js"></script>
 
 </body>
 </html>
