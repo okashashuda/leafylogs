@@ -1,34 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant Caring Simulation</title>
-</head>
-
-<body>
-    <div class="container">
-        <!-- Plant Display Area -->
-        <div class="plant-display">
-            <!-- Insert plant image here -->
-            <img src="plant-image.gif" alt="Plant Image">
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="actions">
-            <button id="waterButton">Water</button>
-            <button id="mulchButton">Add Mulch</button>
-        </div>
-
-        <!-- Status Display -->
-        <div class="status-display">
-            <p><strong>Hydration Level:</strong> <span id="hydrationStatus">100%</span></p>
-            <p><strong>Nutrient Level:</strong> <span id="nutrientStatus">100%</span></p>
-        </div>
-    </div>
-
-    <!-- You can add your JavaScript logic here or link to an external .js file -->
+// You can add your JavaScript logic here or link to an external .js file
     <script>
         // Sample JavaScript logic (you will need to expand on this)
 
@@ -54,6 +24,3 @@
         // You can then implement the logic for updating hydration and nutrient status, 
         // and also checking the plant health based on the elapsed time.
     </script>
-</body>
-
-</html>
