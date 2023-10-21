@@ -10,20 +10,27 @@
 
 <body>
     <div id="splashScreen">
-        <button onclick="hideSplashScreen()">Button 1</button>
-        <button onclick="hideSplashScreen()">Button 2</button>
-        <button onclick="hideSplashScreen()">Button 3</button>
-        <button onclick="hideSplashScreen()">Button 4</button>
-    </div>
+        <h1>Plant Care Simulator</h1>
+        <div class="corners">
+            <img src="assets\spring\springseed.png" alt="Spring Seedling Image" class="corner-image top-left">
+            <img src="assets\summer\summerseed.png" alt="Summer Seedling Image" class="corner-image top-right">
+            <img src="assets\fall\fallseed.png" alt="Fall Seedling Image" class="corner-image bottom-left">
+            <img src="assets\winter\winterseed.png" alt="Winter Seedling Image" class="corner-image bottom-right">
+        </div>
 
-    
-    <div id="fireEffect" class="fire-effect"></div>
+        <div class="buttons">
+            <button onclick="storeOption('spring')">Spring</button>
+            <button onclick="storeOption('summer')">Summer</button>
+            <button onclick="storeOption('fall')">Fall</button>
+            <button onclick="storeOption('winter')">Winter</button>
+        </div>
+    </div>
 
     <div class="container">
         <!-- Plant Display Area -->
         <div class="plant-display">
             <!-- Insert plant image here -->
-            <img src="plant-image.gif" alt="Plant Image">
+            <img id="seasonImage" src="" alt="Image representing the season">
         </div>
 
         <!-- Action Buttons -->
@@ -47,4 +54,5 @@
     <script src="app.js"></script>
 
 </body>
+
 </html>

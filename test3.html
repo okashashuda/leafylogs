@@ -9,15 +9,6 @@
 </head>
 
 <body>
-    <div id="splashScreen">
-        <button onclick="hideSplashScreen()">Button 1</button>
-        <button onclick="hideSplashScreen()">Button 2</button>
-        <button onclick="hideSplashScreen()">Button 3</button>
-        <button onclick="hideSplashScreen()">Button 4</button>
-    </div>
-
-    
-    <div id="fireEffect" class="fire-effect"></div>
 
     <div class="container">
         <!-- Plant Display Area -->
@@ -46,5 +37,22 @@
 
     <script src="app.js"></script>
 
+    <audio id="music" loop>
+        <source src="journey-end(chosic.com).mp3 binary.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        document.getElementById('playButton').addEventListener('click', function() {
+            var music = document.getElementById('music');
+            if (music.paused) {
+                music.play();
+                this.textContent = 'Pause Music';
+            } else {
+                music.pause();
+                this.textContent = 'Play Music';
+            }
+        });
+    </script>
 </body>
 </html>

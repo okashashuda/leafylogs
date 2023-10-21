@@ -47,7 +47,7 @@ body {
     margin-top: 20px;
 }
 
-.splash {
+.splash-screen {
     position: fixed;
     width: 50%;
     height: 50%;
@@ -55,23 +55,14 @@ body {
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    z-index: 9999;
-    /* Ensure the splash screen is on top of everything */
+    justify-content: center;
 }
 
 .splash h1 {
     font-size: 34px;
     text-align: center;
     color: #333;
-}
-
-.splash h3 {
-    font-size: 18px;
-    text-align: center;
-    color: #333;
-    opacity: 0.8;
 }
 
 /* Style the dropdown container */
@@ -97,7 +88,9 @@ body {
 }
 
 #submitMsg {
-    padding: 10px 20px;
+    padding: 10px 10px;
+    margin: 5px;
+    margin-left: 190px;
     border: none;
     background-color: #4CAF50;
     color: #fff;
@@ -105,34 +98,88 @@ body {
     cursor: pointer;
 }
 
-/* fire effect for when disaster happens - DAniel */
-/* Add these styles for the fire effect */
-.fire-effect {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(to bottom, #ff3300, #ff9900);
-    opacity: 0;
-    animation: fireAppear 2s forwards;
-    z-index: 0; /* Ensure the fire is on top of everything */
-}
-
-
 #splashScreen {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,0.8); /* semi-transparent white */
+    width: 100vw;
+    height: 100vh;
+    background-color: #f5f5f5;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-#splashScreen button {
-    margin: 5px;
-    padding: 10px 20px;
+
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
 }
+
+.content {
+    display: none;
+    text-align: center;
+    padding: 50px;
+    font-size: 2rem;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.corner-image {
+    position: absolute;
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+}
+
+.top-left {
+    top: 0;
+    left: 0;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+    margin-right: 15px;
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+    margin-bottom: 5px;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+    margin-right: 15px;
+    margin-bottom: 5px;
+}
+
+/* Add to your existing CSS file */
+.leaf-message {
+    background-image: url('green-single-leaf-in-pixel-art-style-vector-removebg-preview.png'); /* Replace with the actual path to your leaf image */
+    background-size: cover;
+    padding: 20px;
+    border-radius: 10px; /* Optional: for rounded corners */
+    margin: 10px 0;
+    font-family: 'Georgia', serif; /* A nice, readable font */
+    font-size: 1.2em;
+    color: #2d2d2d; /* Dark text color for readability */
+    text-align: center;
+    max-width: 200px; /* Or whatever maximum width you want */
+    word-wrap: break-word; /* To ensure long words don't overflow */
+}
+
 
 @keyframes fireAppear {
     0% {
@@ -142,3 +189,5 @@ body {
         opacity: 0;
     }
 }
+
+

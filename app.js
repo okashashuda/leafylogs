@@ -18,7 +18,7 @@ function updateLastLogin() {
 const updatingTime = setInterval(updateLastLogin, 1000); // updates last login time
 
 // Convert the time difference to days
-const daysPassed = Math.floor(timeDifference/(1000));
+const daysPassed = 1; //Math.floor(timeDifference/(1000));
 
 console.log("days passed " + daysPassed);
 
@@ -71,15 +71,6 @@ function checkForDisaster() {
 
         // Update the display to reflect the new levels
         updateDisplay();
-
-        // Show the fire effect
-        const fireEffect = document.getElementById("fireEffect");
-        fireEffect.style.display = "block";
-
-        // Hide the fire effect after a few seconds (adjust the timeout as needed)
-        setTimeout(() => {
-            fireEffect.style.display = "none";
-        }, 3000); // Hide after 3 seconds
     }
 }
 
@@ -140,6 +131,10 @@ waterButton.addEventListener('click', function() {
         if (hydration > 100) hydration = 100;
 
         updateDisplay();
+
+        if (daysPassed > 0) {
+            displayNewLeaf();
+        }
         
     } else {
         alert("You've already watered the plant today!");
@@ -170,17 +165,24 @@ mulchButton.addEventListener('click', function() {
 });
 
 // New Leaf mechanic
+const fallAlert = document.getElementById("leafFall");
 const newLeafMsg = document.getElementById("newLeaf");
 const submitButton = document.getElementById("submitMsg");
 const reply = document.getElementById("replyMsg");
 
-if (daysPassed > 0) {
+function displayNewLeaf() { // Displaying and hiding the message box and button
+    fallAlert.style.display = 'block';
     newLeafMsg.style.display = 'block';
     submitButton.style.display = 'block';
 
     submitButton.addEventListener("click", function () {
         const msg = newLeafMsg.value;
 
+        const currentDate = new Date();
+        const key = 'message_' + currentDate.toISOString();
+        localStorage.setItem(key, msg);
+
+        fallAlert.style.display = 'none';
         newLeafMsg.style.display = 'none';
         submitButton.style.display = 'none';
 
@@ -190,22 +192,113 @@ if (daysPassed > 0) {
             reply.style.display = 'none';
         }, 5000);
 
-        //retrieveMessages();
+        displaySavedMessages();
+        getRandomSavedMessage();
+        localStorage.clear();
     });
 }
 
-// function retrieveMessages() { // Retrieve saved messages from leaves
-//     for (let i = 0; i < localStorage.length; i++) {
-//         const key = localStorage.key(i);
-        
-//         if (key.startsWith("message_")) {
-//             const message = localStorage.getItem(key);
-//             const alertMessage = "Date: ${key}\nMessage: ${message}";
-//             alert(alertMessage);
-//         }
-//     }
-// }
-
-function hideSplashScreen() {
-    document.getElementById("splashScreen").style.display = "none";
+function displaySavedMessages() {
+    let allMessages = '';
+    
+    
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+  
+        if (key.startsWith("message_")) {
+            const message = localStorage.getItem(key);
+            const alertMessage = `Date: ${key}\nMessage: ${message}`;
+            allMessages += `${alertMessage}\n\n`;
+        }
+    }
+    
+    alert('Leaves you have written:\n\n' + allMessages);
 }
+
+function displaySavedMessages() {
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.innerHTML = '';  // Clear previous messages
+
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+
+        if (key.startsWith("message_")) {
+            const message = localStorage.getItem(key);
+            const leafDiv = document.createElement('div');
+            leafDiv.className = 'leaf-message';
+            leafDiv.textContent = message;
+            messageContainer.appendChild(leafDiv);
+        }
+    }
+}
+  
+function getRandomSavedMessage() {
+    // Create an array to store all keys that match the pattern
+    const messageKeys = [];
+  
+    // Iterate through localStorage keys
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+  
+      if (key.startsWith("message_")) {
+        messageKeys.push(key);
+      }
+    }
+  
+    // Generate a random index to select a key
+    const randomIndex = Math.floor(Math.random() * messageKeys.length);
+  
+    // Use the randomly selected key to retrieve the associated message
+    const randomMessageKey = messageKeys[randomIndex];
+    const randomMessage = localStorage.getItem(randomMessageKey);
+  
+    alert('Random Saved Message:\n\n' + `Date: ${randomMessageKey}\nMessage: ${randomMessage}`);
+  }
+  
+  
+
+// Check if the splash screen should be shown or not
+window.addEventListener('DOMContentLoaded', function () {
+    let chosenOption = localStorage.getItem('seasonImage');
+    if (chosenOption) {
+        document.getElementById('splashScreen').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
+    
+        displayImage(chosenOption);  // Display the image based on the stored option
+
+    }
+});
+
+// Store the option chosen by the user and hide the splash screen
+function storeOption(option) {
+    localStorage.setItem('seasonImage', option);
+    document.getElementById('splashScreen').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+
+    displayImage(option);
+}
+
+function displayImage(option) {
+    let imagePath = "assets/";
+    
+    switch (option) {
+        case 'Spring':
+            imagePath += "spring/";
+            break;
+        case 'Summer':
+            imagePath += "summer/";
+            break;
+        case 'Fall':
+            imagePath += "fall/";
+            break;
+        case 'Winter':
+            imagePath += "winter/";
+            break;
+    }
+
+    const finalImagePath = imagePath + "1.png";  // Always select the first image
+    console.log(finalImagePath);
+    document.getElementById('seasonImage').src = finalImagePath;
+}
+
+
