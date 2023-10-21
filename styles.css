@@ -76,46 +76,24 @@ body {
 
 /* Style the dropdown container */
 .dropdown {
-    position: relative;
-    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
 }
 
-/* Style the button that triggers the dropdown menu */
-.dropbtn {
-    background-color: #4CAF50;
-    border-radius: 5px;
-    color: white;
+.confirm-button {
+    background-color: #ccc; /* Grayed out color */
+    color: #888; /* Text color for the grayed out button */
     padding: 10px;
     border: none;
+    cursor: not-allowed; /* Disable pointer events */
+}
+
+/* Change the confirm button's color and enable it when a dropdown option is selected */
+#dropdown:valid ~ #confirmButton {
+    background-color: #4CAF50; /* Change to desired color when active */
+    color: white;
     cursor: pointer;
-}
-
-/* Style the dropdown content (hidden by default) */
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-/* Style the links inside the dropdown */
-.dropdown-content a {
-    color: #333;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-/* Change color on hover */
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-/* Show the dropdown content when hovering over the dropdown button */
-.dropdown:hover .dropdown-content {
-    display: block;
 }
 
 #submitMsg {
@@ -125,4 +103,42 @@ body {
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
+}
+
+/* fire effect for when disaster happens - DAniel */
+/* Add these styles for the fire effect */
+.fire-effect {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #ff3300, #ff9900);
+    opacity: 0;
+    animation: fireAppear 2s forwards;
+    z-index: 0; /* Ensure the fire is on top of everything */
+}
+
+
+#splashScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.8); /* semi-transparent white */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#splashScreen button {
+    margin: 5px;
+    padding: 10px 20px;
+}
+
+@keyframes fireAppear {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
 }

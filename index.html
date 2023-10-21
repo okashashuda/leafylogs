@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div id="splashScreen" class="splash">
+    <!-- <div id="splashScreen" class="splash">
         <h1>Plant Caring Simulation</h1>
 
         <div class="dropdown">
@@ -20,10 +20,12 @@
                 <a href="#">Option 3</a>
             </div>
         </div>
-
-        <h3>click anywhere to continue...</h3>
-    </div>
+        
+        <button id="confirmButton" class="confirm-button" disabled>Confirm</button>
+    </div> -->
     
+    <div id="fireEffect" class="fire-effect"></div>
+
     <div class="container">
         <!-- Plant Display Area -->
         <div class="plant-display">
@@ -46,6 +48,7 @@
         <!-- New leaf -->
         <textarea id="newLeaf" rows="4" cols="50" style="display: none;"></textarea>
         <button id="submitMsg" style="display: none;">Write to leaf</button>
+        <p id="replyMsg" style="display: none;"><strong>Successfully written to leaf</strong></p>
     </div>
 
     <script src="app.js"></script>

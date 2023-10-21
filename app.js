@@ -1,16 +1,24 @@
 // Retrieve lastLoginDate from localStorage and convert it to a Date object
-const lastLoginDate = new Date(localStorage.getItem('lastLoginDate'));
+const lastLoginDateString = localStorage.getItem('lastLoginDate');
+const lastLoginDate = lastLoginDateString ? new Date(lastLoginDateString) : null;
 
-// Get the current date
 const todayLoginDate = new Date();
-const dateString = todayLoginDate.toISOString();
-localStorage.setItem('lastLoginDate', dateString);
 
 // Calculate the time difference in milliseconds
-const timeDifference = todayLoginDate - lastLoginDate;
+const timeDifference = lastLoginDate ? todayLoginDate - lastLoginDate : 0;
+
+// Function to update last login time
+function updateLastLogin() {
+    const todayLoginDate = new Date();
+    const dateString = todayLoginDate.toISOString();
+    localStorage.setItem('lastLoginDate', dateString);
+}
+
+//updates last time logged on every time
+const updatingTime = setInterval(updateLastLogin, 1000); // updates last login time
 
 // Convert the time difference to days
-const daysPassed = 1; //Math.floor(timeDifference / (1000 * 60));
+const daysPassed = Math.floor(timeDifference/(1000));
 
 console.log("days passed " + daysPassed);
 
@@ -19,9 +27,17 @@ function decayRateCalculator(daysPassed) {
     return ((1/50)*(daysPassed)*(daysPassed))+5
 }
 
-// Initial hydration and nutrient levels
-let hydration = 100;
-let nutrients = 100;
+// Retrieve values from localStorage or set default values
+let hydration = localStorage.getItem('hydration') ? parseFloat(localStorage.getItem('hydration')) : 100;
+let nutrients = localStorage.getItem('nutrient') ? parseFloat(localStorage.getItem('nutrient')) : 100;
+
+function updateHydrationNutrients() {
+    localStorage.setItem('hydration', hydration);
+    localStorage.setItem('nutrient', nutrients);
+}
+
+//continusally updates hydration and nutrients
+const hydrationAndNutrient = setInterval(updateHydrationNutrients, 1000); // Updates hydration & nutrient
 
 // Get DOM elements
 const waterButton = document.getElementById("waterButton");
@@ -42,23 +58,33 @@ function updateDisplay() {
     }
 }
 
-//Diaster function, P(X) = 1/8, X = disaster happening
+//Disaster function, P(X) = 1/8, X = disaster happening
+// Check for a disaster event upon login
 // Check for a disaster event upon login
 function checkForDisaster() {
     if (Math.random() < 0.125) { // 1/8 chance
         alert("A disaster has occurred!");
-        
+
         // Halve the hydration and nutrient levels
         hydration *= 0.5;
         nutrients *= 0.5;
 
         // Update the display to reflect the new levels
         updateDisplay();
+
+        // Show the fire effect
+        const fireEffect = document.getElementById("fireEffect");
+        fireEffect.style.display = "block";
+
+        // Hide the fire effect after a few seconds (adjust the timeout as needed)
+        setTimeout(() => {
+            fireEffect.style.display = "none";
+        }, 3000); // Hide after 3 seconds
     }
 }
 
 // Call the checkForDisaster function when the user logs in
-checkForDisaster();
+// checkForDisaster();
 
 // Decay functions
 function decayHydration() {
@@ -74,8 +100,8 @@ function decayNutrients() {
 }
 
 //when opened use decayhydration and decay nutrients
-decayHydration();
-decayNutrients();
+// decayHydration();
+// decayNutrients();
 
 //function to see if watering is possible 
 function canWater() {
@@ -146,37 +172,40 @@ mulchButton.addEventListener('click', function() {
 // New Leaf mechanic
 const newLeafMsg = document.getElementById("newLeaf");
 const submitButton = document.getElementById("submitMsg");
+const reply = document.getElementById("replyMsg");
 
 if (daysPassed > 0) {
     newLeafMsg.style.display = 'block';
     submitButton.style.display = 'block';
-    
+
     submitButton.addEventListener("click", function () {
         const msg = newLeafMsg.value;
 
         newLeafMsg.style.display = 'none';
         submitButton.style.display = 'none';
 
-        const messageElement = document.getElementById('div');
-        messageElement.textContent = "Leaf written";
-        document.body.appendChild(messageElement);
-        
+        reply.style.display = 'block';
+
         setTimeout(function () {
-            document.body.removeChild(doneMsg);
+            reply.style.display = 'none';
         }, 5000);
+
+        //retrieveMessages();
     });
 }
 
-//splash screen
-document.addEventListener("DOMContentLoaded", function () {
-    const splashScreen = document.getElementById("splashScreen");
+// function retrieveMessages() { // Retrieve saved messages from leaves
+//     for (let i = 0; i < localStorage.length; i++) {
+//         const key = localStorage.key(i);
+        
+//         if (key.startsWith("message_")) {
+//             const message = localStorage.getItem(key);
+//             const alertMessage = "Date: ${key}\nMessage: ${message}";
+//             alert(alertMessage);
+//         }
+//     }
+// }
 
-    // Show the splash screen when the page loads
-    splashScreen.style.display = "flex";
-
-    splashScreen.addEventListener("click", function () {
-        // Hide the splash screen when it's clicked
-        splashScreen.style.display = "none";
-    });
-});
-
+function hideSplashScreen() {
+    document.getElementById("splashScreen").style.display = "none";
+}
