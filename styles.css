@@ -32,6 +32,7 @@ body {
 
 .actions button {
     padding: 10px 20px;
+    margin: 5px;
     border: none;
     background-color: #4CAF50;
     color: #fff;
@@ -165,29 +166,37 @@ button:hover {
     margin-bottom: 5px;
 }
 
-/* Add to your existing CSS file */
-.leaf-message {
-    background-image: url('green-single-leaf-in-pixel-art-style-vector-removebg-preview.png'); /* Replace with the actual path to your leaf image */
+/* Message loading on leaf */
+
+.message-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.9);
+    justify-content: center;
+    align-items: center;
+}
+
+.message-leaf-background {
+    background-image: url('path-to-your-leaf-image.png');
     background-size: cover;
-    padding: 20px;
-    border-radius: 10px; /* Optional: for rounded corners */
-    margin: 10px 0;
-    font-family: 'Georgia', serif; /* A nice, readable font */
-    font-size: 1.2em;
-    color: #2d2d2d; /* Dark text color for readability */
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.random-message-text {
+    font-family: 'Your Pixel Font', sans-serif;
+    color: #000;
     text-align: center;
-    max-width: 200px; /* Or whatever maximum width you want */
-    word-wrap: break-word; /* To ensure long words don't overflow */
+    overflow: hidden;
+    width: 80%;  /* Adjust as needed */
+    height: 80%;  /* Adjust as needed */
+    position: absolute;
 }
-
-
-@keyframes fireAppear {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-    }
-}
-
-

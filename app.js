@@ -55,6 +55,7 @@ function updateDisplay() {
         // Stop the decay intervals
         clearInterval(hydrationInterval);
         clearInterval(nutrientInterval);
+        localStorage.clear();
     }
 }
 
@@ -91,8 +92,8 @@ function decayNutrients() {
 }
 
 //when opened use decayhydration and decay nutrients
-// decayHydration();
-// decayNutrients();
+//decayHydration();
+//decayNutrients();
 
 //function to see if watering is possible 
 function canWater() {
@@ -194,7 +195,6 @@ function displayNewLeaf() { // Displaying and hiding the message box and button
 
         displaySavedMessages();
         getRandomSavedMessage();
-        localStorage.clear();
     });
 }
 
@@ -215,23 +215,25 @@ function displaySavedMessages() {
     alert('Leaves you have written:\n\n' + allMessages);
 }
 
-function displaySavedMessages() {
-    const messageContainer = document.getElementById('messageContainer');
-    messageContainer.innerHTML = '';  // Clear previous messages
+// function displaySavedMessages() {
+//     const messageContainer = document.getElementById('messageContainer');
+//     messageContainer.innerHTML = '';  // Clear previous messages
 
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
+//     for (let i = 0; i < localStorage.length; i++) {
+//         const key = localStorage.key(i);
 
-        if (key.startsWith("message_")) {
-            const message = localStorage.getItem(key);
-            const leafDiv = document.createElement('div');
-            leafDiv.className = 'leaf-message';
-            leafDiv.textContent = message;
-            messageContainer.appendChild(leafDiv);
-        }
-    }
-}
-  
+//         if (key.startsWith("message_")) {
+//             const message = localStorage.getItem(key);
+//             const leafDiv = document.createElement('div');
+//             leafDiv.className = 'leaf-message';
+//             leafDiv.textContent = message;
+//             messageContainer.appendChild(leafDiv);
+//         }
+//     }
+// }
+
+//make it load on a leaf background
+
 function getRandomSavedMessage() {
     // Create an array to store all keys that match the pattern
     const messageKeys = [];
@@ -257,48 +259,90 @@ function getRandomSavedMessage() {
   
   
 
-// Check if the splash screen should be shown or not
-window.addEventListener('DOMContentLoaded', function () {
-    let chosenOption = localStorage.getItem('seasonImage');
-    if (chosenOption) {
-        document.getElementById('splashScreen').style.display = 'none';
-        document.getElementById('content').style.display = 'block';
-    
-        displayImage(chosenOption);  // Display the image based on the stored option
 
-    }
+
+// // Store the option chosen by the user and hide the splash screen
+// function storeOption(option) {
+//     localStorage.setItem('seasonImage', option);
+//     document.getElementById('splashScreen').style.display = 'none';
+//     document.getElementById('content').style.display = 'block';
+
+//     displayImage(option);
+// }
+
+// function displayImage(option) {
+//     let imagePath = "assets/";
+    
+//     switch (option) {
+//         case 'Spring':
+//             imagePath += "spring/";
+//             break;
+//         case 'Summer':
+//             imagePath += "summer/";
+//             break;
+//         case 'Fall':
+//             imagePath += "fall/";
+//             break;
+//         case 'Winter':
+//             imagePath += "winter/";
+//             break;
+//     }
+
+//     const finalImagePath = imagePath + "1.png";  // Always select the first image
+//     console.log(finalImagePath);
+//     document.getElementById('seasonImage').src = finalImagePath;
+// }
+
+// JavaScript code for changing the plant image based on the button clicked
+
+
+
+// Get references to the buttons and the image element
+const button1 = document.getElementById("spring");
+const button2 = document.getElementById("summer");
+const button3 = document.getElementById("fall");
+const button4 = document.getElementById("winter");
+const seasonImage = document.getElementById("seasonImage");
+
+// Event listeners for each button
+button1.addEventListener("click", () => {
+    setImageAndStorePath("assets/spring/1.png");
+       document.getElementById('splashScreen').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
 });
 
-// Store the option chosen by the user and hide the splash screen
-function storeOption(option) {
-    localStorage.setItem('seasonImage', option);
+button2.addEventListener("click", () => {
+    setImageAndStorePath("assets/summer/1.png");
     document.getElementById('splashScreen').style.display = 'none';
     document.getElementById('content').style.display = 'block';
+});
 
-    displayImage(option);
+button3.addEventListener("click", () => {
+    setImageAndStorePath("assets/fall/1.png");
+    document.getElementById('splashScreen').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+});
+
+button4.addEventListener("click", () => {
+    setImageAndStorePath("assets/winter/1.png");
+    document.getElementById('splashScreen').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+});
+
+// Function to set the image source and store the path in local storage
+function setImageAndStorePath(imagePath) {
+    seasonImage.src = imagePath;
+    // Store the selected image path in local storage
+    localStorage.setItem("selectedImagePath", imagePath);
 }
 
-function displayImage(option) {
-    let imagePath = "assets/";
-    
-    switch (option) {
-        case 'Spring':
-            imagePath += "spring/";
-            break;
-        case 'Summer':
-            imagePath += "summer/";
-            break;
-        case 'Fall':
-            imagePath += "fall/";
-            break;
-        case 'Winter':
-            imagePath += "winter/";
-            break;
+    // Check if there is a stored image path in local storage and set the image
+    const storedImagePath = localStorage.getItem("selectedImagePath");
+    if (storedImagePath) {
+        seasonImage.src = storedImagePath;
+        document.getElementById('splashScreen').style.display = 'none';
+        document.getElementById('content').style.display = 'block';
     }
 
-    const finalImagePath = imagePath + "1.png";  // Always select the first image
-    console.log(finalImagePath);
-    document.getElementById('seasonImage').src = finalImagePath;
-}
 
 

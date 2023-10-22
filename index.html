@@ -19,10 +19,10 @@
         </div>
 
         <div class="buttons">
-            <button onclick="storeOption('spring')">Spring</button>
-            <button onclick="storeOption('summer')">Summer</button>
-            <button onclick="storeOption('fall')">Fall</button>
-            <button onclick="storeOption('winter')">Winter</button>
+            <button id="spring">Spring</button>
+            <button id="summer">Summer</button>
+            <button id="fall">Fall</button>
+            <button id="winter">Winter</button>
         </div>
     </div>
 
@@ -30,7 +30,7 @@
         <!-- Plant Display Area -->
         <div class="plant-display">
             <!-- Insert plant image here -->
-            <img src="plant-image.gif" alt="Plant Image">
+            <img id="seasonImage" src="" alt="Image representing the season">
         </div>
 
         <!-- Action Buttons -->
@@ -53,6 +53,13 @@
         <textarea id="newLeaf" rows="4" cols="60" style="display: none;"></textarea>
         <button id="submitMsg" style="display: none;">Write to leaf</button>
         <p id="replyMsg" style="display: none;"><strong>Successfully written to leaf</strong></p>
+    </div>
+
+    <!-- Leaf -->
+    <div id="messageModal" class="message-modal">
+        <div class="message-leaf-background">
+            <p id="randomMessageText" class="random-message-text"></p>
+        </div>
     </div>
 
     <script src="app.js"></script>
