@@ -1,3 +1,5 @@
+localStorage.clear();
+
 // Retrieve lastLoginDate from localStorage and convert it to a Date object
 const lastLoginDateString = localStorage.getItem('lastLoginDate');
 const lastLoginDate = lastLoginDateString ? new Date(lastLoginDateString) : null;
@@ -175,45 +177,43 @@ function displayNewLeaf() { // Displaying and hiding the message box and button
     fallAlert.style.display = 'block';
     newLeafMsg.style.display = 'block';
     submitButton.style.display = 'block';
-
-    submitButton.addEventListener("click", function () {
-        const msg = newLeafMsg.value;
-
-        const currentDate = new Date();
-        const key = 'message_' + currentDate.toISOString();
-        localStorage.setItem(key, msg);
-
-        fallAlert.style.display = 'none';
-        newLeafMsg.style.display = 'none';
-        submitButton.style.display = 'none';
-
-        reply.style.display = 'block';
-
-        setTimeout(function () {
-            reply.style.display = 'none';
-        }, 5000);
-
-        displaySavedMessages();
-        getRandomSavedMessage();
-    });
 }
 
-function displaySavedMessages() {
-    let allMessages = '';
+submitButton.addEventListener("click", function () {
+    const msg = newLeafMsg.value;
+
+    const currentDate = new Date();
+    const key = 'message_' + currentDate.toISOString();
+    localStorage.setItem(key, msg);
+
+    fallAlert.style.display = 'none';
+    newLeafMsg.style.display = 'none';
+    submitButton.style.display = 'none';
+
+    reply.style.display = 'block';
+
+    getMessage();
+
+    setTimeout(function () {
+        reply.style.display = 'none';
+    }, 5000);
+});
+
+// function displaySavedMessages() {
+//     let allMessages = '';
     
-    
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
+//     for (let i = 0; i < localStorage.length; i++) {
+//         const key = localStorage.key(i);
   
-        if (key.startsWith("message_")) {
-            const message = localStorage.getItem(key);
-            const alertMessage = `Date: ${key}\nMessage: ${message}`;
-            allMessages += `${alertMessage}\n\n`;
-        }
-    }
+//         if (key.startsWith("message_")) {
+//             const message = localStorage.getItem(key);
+//             const alertMessage = `Date: ${key}\nMessage: ${message}`;
+//             allMessages += `${alertMessage}\n\n`;
+//         }
+//     }
     
-    alert('Leaves you have written:\n\n' + allMessages);
-}
+//     alert('Leaves you have written:\n\n' + allMessages);
+// }
 
 // function displaySavedMessages() {
 //     const messageContainer = document.getElementById('messageContainer');
@@ -234,6 +234,34 @@ function displaySavedMessages() {
 
 //make it load on a leaf background
 
+function getMessage() {
+    const messageKeys = [];
+    let newVar = 0;
+    
+    if (localStorage.length < 10) {
+        alert("Not enough messages to display");
+
+    } else {
+
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+
+            if (key.startsWith("message_")) {
+                messageKeys.push(key);
+                newVar = i;
+                break;
+            }
+        }
+
+        const randomMessageKey = messageKeys[newVar];
+        const randomMessage = localStorage.getItem(randomMessageKey);
+    
+        alert('Random Saved Message:\n\n' + `Date: ${randomMessageKey}\nMessage: ${randomMessage}`);
+        localStorage.removeItem(randomMessageKey)
+    }
+}
+
+/*
 function getRandomSavedMessage() {
     // Create an array to store all keys that match the pattern
     const messageKeys = [];
@@ -256,6 +284,7 @@ function getRandomSavedMessage() {
   
     alert('Random Saved Message:\n\n' + `Date: ${randomMessageKey}\nMessage: ${randomMessage}`);
   }
+  */
   
   
 
@@ -343,6 +372,3 @@ function setImageAndStorePath(imagePath) {
         document.getElementById('splashScreen').style.display = 'none';
         document.getElementById('content').style.display = 'block';
     }
-
-
-
