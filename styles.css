@@ -200,3 +200,7 @@ button:hover {
     height: 80%;  /* Adjust as needed */
     position: absolute;
 }
+
+#messageContainer {
+    z-index: 9999;
+}

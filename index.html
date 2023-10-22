@@ -5,12 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles.css">
-    <title>Plant Caring Simulation</title>
+    <title>LeafyLogs</title>
 </head>
 
 <body>
     <div id="splashScreen">
-        <h1>Plant Care Simulator</h1>
+        <h1>LeafyLogs</h1>
         <div class="corners">
             <img src="assets\spring\springseed.png" alt="Spring Seedling Image" class="corner-image top-left">
             <img src="assets\summer\summerseed.png" alt="Summer Seedling Image" class="corner-image top-right">
@@ -30,7 +30,7 @@
         <!-- Plant Display Area -->
         <div class="plant-display">
             <!-- Insert plant image here -->
-            <img id="seasonImage" src="" alt="Image representing the season">
+            <img id="seasonImage" src="" alt="Image representing the season" width="200", height="350">
         </div>
 
         <!-- Action Buttons -->
@@ -56,10 +56,9 @@
     </div>
 
     <!-- Leaf -->
-    <div id="messageModal" class="message-modal">
-        <div class="message-leaf-background">
-            <p id="randomMessageText" class="random-message-text"></p>
-        </div>
+    <div id="messageContainer" style="display: none;">
+        <img id="leafImage" src="assets/display_leaf.png" alt="Leaf Image">
+        <textarea id="messageTextBox" readonly></textarea>
     </div>
 
     <script src="app.js"></script>
